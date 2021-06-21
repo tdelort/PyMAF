@@ -118,6 +118,7 @@ def main(args):
             output_format='dict',
             yolo_img_size=args.yolo_img_size,
         )
+        # TODO : Move this to be used on each frames instead of all frames
         tracking_results = mot(image_folder)
 
     # remove tracklets if num_frames is less than MIN_NUM_FRAMES
@@ -139,6 +140,7 @@ def main(args):
     model.eval()
     print(f'Loaded pretrained weights from \"{args.checkpoint}\"')
 
+    # END of Initialisation.
     # ========= Run pred on each person ========= #
     if args.recon_result_file:
         pred_results = joblib.load(args.recon_result_file)
@@ -281,7 +283,7 @@ def main(args):
         if args.use_opendr:
             renderer = OpenDRenderer(resolution=(orig_height, orig_width))
         else:
-            renderer = PyRenderer(resolution=(orig_width, orig_height))
+            renderer = PyRenderer(resolution=(orig_width, orig_height), wireframe=True)
 
         output_img_folder = os.path.join(output_path, osp.split(image_folder)[-1] + '_output')
         os.makedirs(output_img_folder, exist_ok=True)

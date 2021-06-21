@@ -272,6 +272,8 @@ class PyMAF(nn.Module):
         out_list = {}
 
         # initial parameters
+        # TODO : use the previous frame pose (if there is any) to init
+        # Maybe by feeding it into this forward_init func or by replacing the smpl_output below
         smpl_output = self.regressor[0].forward_init(g_feat, J_regressor=J_regressor)
 
         out_list['smpl_out'] = [smpl_output]

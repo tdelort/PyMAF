@@ -57,3 +57,6 @@ venv.bak/
 # vim swap files
 *.swp
 *.pyc
+
+# custom
+run.sh
